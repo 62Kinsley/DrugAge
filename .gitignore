@@ -1,0 +1,101 @@
+# DrugAge聊天机器人项目 - Git忽略文件
+
+# Python相关
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 虚拟环境
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# IDE和编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 环境变量和配置
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 日志文件
+*.log
+logs/
+log/
+
+# 数据文件（根据需要调整）
+data/temp/
+data/cache/
+*.csv
+*.xlsx
+*.json
+*.zip
+
+# 但保留示例数据（如果有）
+!data/example/
+!data/sample/
+
+# Streamlit相关
+.streamlit/secrets.toml
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# 系统文件
+*.pid
+*.seed
+*.pid.lock
+
+# 备份文件
+*.bak
+*.backup
+*.old
+
+# 临时文件
+tmp/
+temp/
+.tmp/

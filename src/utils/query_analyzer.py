@@ -138,11 +138,11 @@ class QueryAnalyzer:
         """
         query_lower = query.lower().strip()
         
-        # Extract entities
-        entities = self._extract_entities(query_lower)
+        # Apply synonym matching to normalize query BEFORE entity extraction
+        normalized_query = self._normalize_query_with_synonyms(query_lower)
         
-        # Apply synonym matching to normalize entities
-        entities = self._normalize_entities_with_synonyms(entities)
+        # Extract entities from normalized query
+        entities = self._extract_entities(normalized_query)
         
         # Determine query type
         query_type, confidence = self._determine_query_type(query_lower, entities)
@@ -223,6 +223,54 @@ class QueryAnalyzer:
         
         return entities
     
+
+    def _normalize_query_with_synonyms(self, query: str) -> str:
+        """
+        Normalize query text by replacing synonyms with standard names
+        
+        Args:
+            query: Original query text
+            
+        Returns:
+            str: Normalized query text
+        """
+        normalized_query = query
+        
+        # Replace drug synonyms
+        for synonym, standard in self.synonym_matcher.drug_synonyms.items():
+            pattern = r'\b' + re.escape(synonym) + r'\b'
+            normalized_query = re.sub(pattern, standard, normalized_query, flags=re.IGNORECASE)
+        
+        # Replace organism synonyms
+        for synonym, standard in self.synonym_matcher.organism_synonyms.items():
+            pattern = r'\b' + re.escape(synonym) + r'\b'
+            normalized_query = re.sub(pattern, standard, normalized_query, flags=re.IGNORECASE)
+        
+        return normalized_query
+
+    def _normalize_query_with_synonyms(self, query: str) -> str:
+        """
+        Normalize query text by replacing synonyms with standard names
+        
+        Args:
+            query: Original query text
+            
+        Returns:
+            str: Normalized query text
+        """
+        normalized_query = query
+        
+        # Replace drug synonyms
+        for synonym, standard in self.synonym_matcher.drug_synonyms.items():
+            pattern = r'\b' + re.escape(synonym) + r'\b'
+            normalized_query = re.sub(pattern, standard, normalized_query, flags=re.IGNORECASE)
+        
+        # Replace organism synonyms
+        for synonym, standard in self.synonym_matcher.organism_synonyms.items():
+            pattern = r'\b' + re.escape(synonym) + r'\b'
+            normalized_query = re.sub(pattern, standard, normalized_query, flags=re.IGNORECASE)
+        
+        return normalized_query
     def _normalize_entities_with_synonyms(self, entities: Dict[str, List[str]]) -> Dict[str, List[str]]:
         """
         Normalize entities using synonym matching
